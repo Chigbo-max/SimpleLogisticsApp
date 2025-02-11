@@ -52,7 +52,7 @@ public class ItemTest{
         System.out.println(newItem.getItemsSize());
 
         newItem.deleteItemById(newItem.getId());
-//        assertEquals(newItem.getCount(), 0 );
+        assertEquals(newItem.getCount(), 0 );
     }
 
 
