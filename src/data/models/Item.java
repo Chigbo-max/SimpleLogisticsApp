@@ -23,13 +23,10 @@ public class Item {
     }
 
 
-    //UPDATE BOOLEANEXISTBY ID DELETE BY ID 
 
     public int getItemsSize  () {
         return getItems().size();
-//        for (Item item : Items.getItems()) {
-//            return item.leng;
-//        }
+
     }
 
     public void saveItem(Item item){
