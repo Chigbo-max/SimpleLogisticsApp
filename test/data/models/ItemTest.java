@@ -1,59 +1,158 @@
 package data.models;
 
 
+import data.repositries.Items;
+import org.junit.Before;
 import org.junit.Test;
+
+
 import static org.junit.Assert.*;
 
 public class ItemTest{
-    @Test
-    public void testItemsAreCreated(){
-        Item newItem = new Item("bag", "to be delivered quick", 2);
-        Item secondItem = new Item("bag", "to be delivered quick", 2);
-        Item thirdItem = new Item("bag", "to be delivered quick", 2);
 
-        assertEquals(thirdItem.getId(), 3);
+    Item item;
+    Items items;
+
+    @Before
+    public void setUp(){
+        item = new Item();
+        items = new Items();
     }
 
     @Test
-    public void testThatItemNameIsUpdated(){
-        Item newItem = new Item("bag", "to be delivered quick", 2);
-        newItem.setName("second hand bag");
-        assertEquals("second hand bag", newItem.getName());
+    public void testThatItemListIsEmpty(){
+         assertEquals(0,items.count());
     }
 
     @Test
-    public void testThatItemsAreAddedToTheList(){
-        Item newItem = new Item("bag", "to be delivered quick", 2);
-        newItem.saveItem(newItem);
-        assertEquals(newItem.getItemsSize(), 1);
+    public void addTwoItems_getTwo(){
+        items.save(item);
+        assertEquals(1,items.count());
+        Item newItem = new Item();
+        items.save(newItem);
+        assertEquals(2,items.count());
     }
 
     @Test
-    public void testThatItemsCanBeFoundByTheirId(){
-        Item newItem = new Item("bag", "to be delivered quick", 2);
-        newItem.saveItem(newItem);
-        assertEquals(newItem.findItemById(newItem.getId()), newItem.getId());
-        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, ()-> newItem.findItemById(5));
-        assertEquals(illegalArgumentException.getMessage(), "Id not found");
+    public void addTwoItems_deleteOneById_getOne(){
+        items.save(item);
+        assertEquals(1,items.count());
+        Item newItem = new Item();
+        items.save(newItem);
+        assertEquals(2,items.count());
+        items.deleteById(newItem.getId());
+        assertEquals(1,items.count());
+    }
+
+    @Test
+    public void addTwoItems_deleteAllById_getZero(){
+        items.save(item);
+        assertEquals(1,items.count());
+        Item newItem = new Item();
+        items.save(newItem);
+        assertEquals(2,items.count());
+        items.deleteAllById(item.getId(), newItem.getId());
+        assertEquals(0,items.count());
+    }
+
+    @Test
+    public void deleteAllItems_Zero(){
+        items.save(item);
+        assertEquals(1,items.count());
+        Item newItem = new Item();
+        items.save(newItem);
+        assertEquals(2,items.count());
+        items.deleteAll();
+        assertEquals(0,items.count());
     }
 
     @Test
     public void testThatItemExistById(){
-        Item newItem = new Item("bag", "to be delivered quick", 2);
-        newItem.saveItem(newItem);
-        assertTrue(newItem.existById(newItem.getId()));
+        items.save(item);
+        assertTrue(items.existById(item.getId()));
+    }
+
+
+    @Test
+    public void addTwoItems_findAllById_getTwo(){
+        items.save(item);
+        assertEquals(1,items.count());
+        Item newItem = new Item();
+        items.save(newItem);
+        assertEquals(2,items.count());
+         assertEquals(2,items.findAllById(item.getId(), newItem.getId()).size());
     }
 
     @Test
-    public void testThatItemsCanBeDeletedByTheirId(){
-        Item newItem = new Item("bag", "to be delivered quick", 2);
-        newItem.saveItem(newItem);
-        assertEquals(newItem.getItemsSize(), 1);
-        System.out.println(newItem.getItemsSize());
-
-        newItem.deleteItemById(newItem.getId());
-        assertEquals(newItem.getCount(), 0 );
+    public void addTwoItems_findAll_getTwo(){
+        items.save(item);
+        assertEquals(1,items.count());
+        Item newItem = new Item();
+        items.save(newItem);
+        assertEquals(2,items.count());
+        assertEquals(2,items.findAll().size());
     }
+
+
+    @Test
+    public void saveTwoItems_getTwo(){
+        items.save(item);
+        assertEquals(1,items.count());
+        Item newItem = new Item();
+        items.save(newItem);
+        assertEquals(2,items.count());
+        assertEquals(2,items.saveAll(item, newItem).size());
+    }
+
+
+//    @Test
+//    public void testItemsAreCreated(){
+//        Item newItem = new Item("bag", "to be delivered quick", 2);
+//        Item secondItem = new Item("bag", "to be delivered quick", 2);
+//        Item thirdItem = new Item("bag", "to be delivered quick", 2);
+//
+//        assertEquals(thirdItem.getId(), 3);
+//    }
+//
+//    @Test
+//    public void testThatItemNameIsUpdated(){
+//        Item newItem = new Item("bag", "to be delivered quick", 2);
+//        newItem.setName("second hand bag");
+//        assertEquals("second hand bag", newItem.getName());
+//    }
+//
+//    @Test
+//    public void testThatItemsAreAddedToTheList(){
+//        Item newItem = new Item("bag", "to be delivered quick", 2);
+//        newItem.saveItem(newItem);
+//        assertEquals(newItem.getItemsSize(), 1);
+//    }
+//
+//    @Test
+//    public void testThatItemsCanBeFoundByTheirId(){
+//        Item newItem = new Item("bag", "to be delivered quick", 2);
+//        newItem.saveItem(newItem);
+//        assertEquals(newItem.findItemById(newItem.getId()), newItem.getId());
+//        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, ()-> newItem.findItemById(5));
+//        assertEquals(illegalArgumentException.getMessage(), "Id not found");
+//    }
+//
+//    @Test
+//    public void testThatItemExistById(){
+//        Item newItem = new Item("bag", "to be delivered quick", 2);
+//        newItem.saveItem(newItem);
+//        assertTrue(newItem.existById(newItem.getId()));
+//    }
+//
+//    @Test
+//    public void testThatItemsCanBeDeletedByTheirId(){
+//        Item newItem = new Item("bag", "to be delivered quick", 2);
+//        newItem.saveItem(newItem);
+//        assertEquals(newItem.getItemsSize(), 1);
+//        System.out.println(newItem.getItemsSize());
+//        Items.deleteItemById(newItem.getId());
+//        assertEquals(newItem.getCount(), 0 );
+//    }
 
 
 }
