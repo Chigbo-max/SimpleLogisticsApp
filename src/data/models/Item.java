@@ -1,9 +1,5 @@
 package data.models;
-import data.repositries.Items;
 
-import java.util.ArrayList;
-
-import static data.repositries.Items.*;
 
 public class Item {
     private int id;
@@ -12,8 +8,6 @@ public class Item {
     private int weightInGrams;
     private Receiver receiver;
     private Sender sender;
-
-
 
 
     public int getId() {

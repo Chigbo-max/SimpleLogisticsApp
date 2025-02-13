@@ -9,16 +9,13 @@ public class TrackingInfo {
     private String info;
     LocalDateTime time = LocalDateTime.now();
 
-    public TrackingInfo(String info) {
-        this.id = generateId();
-        this.itemId = itemId;
-        this.info = info;
-        this.time = LocalDateTime.now();
-    }
+//    public TrackingInfo(String info) {
+//        this.id = generateId();
+//        this.itemId = itemId;
+//        this.info = info;
+//        this.time = LocalDateTime.now();
+//    }
 
-    public int generateId() {
-        return ++counter;
-    }
 
     public int getId() {
         return id;
