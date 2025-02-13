@@ -26,7 +26,6 @@ public class TrackingInfo {
         this.itemId = itemId;
     }
 
-
     public String getInfo() {
         return info;
     }

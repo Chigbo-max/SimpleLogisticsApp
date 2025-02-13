@@ -62,7 +62,11 @@ public class Items {
 
 
     public ArrayList<Item> findAll(){
-       return items;
+        for(Item item : items) {
+            findById(item.getId());
+        }
+        return items;
+
     }
 
     public ArrayList<Item> saveAll(Item... items) {
