@@ -5,7 +5,7 @@ import data.models.Item;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Items {
+public class Items implements ItemsRepository {
 
    private ArrayList <Item> items = new ArrayList<Item>();
    private static int counter;
@@ -14,10 +14,12 @@ public class Items {
        items = new ArrayList<>();
    }
 
-    public int count  () {
+   @Override
+    public long count  () {
         return items.size();
     }
 
+    @Override
     public Item save(Item item) {
         if(isSaved(item)) saveNew(item);
         else replace(item);
@@ -30,6 +32,7 @@ public class Items {
        return ++counter;
     }
 
+    @Override
     public Item findById(int id) {
        for(Item item : items) {
            if(item.getId() == id) {
@@ -39,21 +42,25 @@ public class Items {
        return null;
     }
 
+    @Override
     public void deleteById(int id) {
        Item item = findById(id);
        items.remove(item);
     }
 
+    @Override
     public void deleteAllById(int ...ids) {
        for(int id : ids) {
            deleteById(id);
        }
     }
 
+    @Override
     public void deleteAll(){
        items.clear();
     }
 
+    @Override
     public boolean existById(int id) {
         for(Item item : items){
             if (item.getId() == id){
@@ -63,7 +70,7 @@ public class Items {
         return false;
     }
 
-
+    @Override
     public ArrayList<Item> findAll(){
         for(Item item : items) {
             findById(item.getId());
@@ -72,10 +79,12 @@ public class Items {
 
     }
 
+    @Override
     public ArrayList<Item> saveAll(Item... items) {
         return new ArrayList<>(Arrays.asList(items));
     }
 
+    @Override
     public ArrayList<Item> findAllById(int ...ids) {
         return getItemsById(ids);
     }

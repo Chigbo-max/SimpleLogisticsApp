@@ -10,7 +10,7 @@ public class TrackingInfos {
     ArrayList<TrackingInfo> trackingInfos = new ArrayList<>();
     private static int counter;
 
-    public int count() {
+    public long count() {
         return trackingInfos.size();
     }
 
