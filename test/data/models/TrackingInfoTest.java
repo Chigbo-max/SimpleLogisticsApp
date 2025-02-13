@@ -113,7 +113,7 @@ public class TrackingInfoTest{
         assertEquals(2,trackingInfos.count());
         trackingInfos.deleteAllEntities(trackingInfo, newTrackingInfo);
         assertEquals(0,trackingInfos.count());
-        System.out.println();
+
     }
 
 

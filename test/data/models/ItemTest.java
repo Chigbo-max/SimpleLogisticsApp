@@ -16,6 +16,9 @@ public class ItemTest{
     @Before
     public void setUp(){
         item = new Item();
+        item.setName("Fridge");
+        item.setDescription("Please deliver in perfect condition");
+        item.setWeightInGrams(200);
         items = new Items();
     }
 
@@ -102,6 +105,17 @@ public class ItemTest{
         items.save(newItem);
         assertEquals(2,items.count());
         assertEquals(2,items.saveAll(item, newItem).size());
+    }
+
+    @Test
+    public void testThatItemName_description_and_weight_is_updated(){
+        items.save(item);
+        assertEquals(1,items.count());
+        item.setName("Phone");
+        item.setDescription("Phone is updated");
+        item.setWeightInGrams(100);
+        items.update(item);
+        assertEquals(1,items.count());
     }
 
 

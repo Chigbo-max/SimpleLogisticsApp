@@ -80,5 +80,16 @@ public class Items {
         return foundItems;
     }
 
+    public void update(Item item) {
+       item.setName(item.getName());
+       item.setDescription(item.getDescription());
+       item.setWeightInGrams(item.getWeightInGrams());
+    }
 
+    @Override
+    public String toString() {
+        return "Items{" +
+                "items=" + items +
+                '}';
+    }
 }
