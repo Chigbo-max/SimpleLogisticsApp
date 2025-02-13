@@ -3,7 +3,7 @@ package data.models;
 import java.time.LocalDateTime;
 
 public class TrackingInfo {
-    private static int counter = 0;
+
     private int id;
     private int itemId;
     private String info;
@@ -25,6 +25,7 @@ public class TrackingInfo {
     public void setItemId(int itemId) {
         this.itemId = itemId;
     }
+
 
     public String getInfo() {
         return info;

@@ -16,6 +16,7 @@ public class TrackingInfos {
 
     public void save(TrackingInfo trackingInfo) {
         trackingInfo.setId(generateId());
+        trackingInfo.setItemId(trackingInfo.getItemId());
         trackingInfos.add(trackingInfo);
     }
 

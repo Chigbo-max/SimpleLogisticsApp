@@ -4,10 +4,9 @@ package data.models;
 import data.repositries.TrackingInfos;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -120,12 +119,14 @@ public class TrackingInfoTest{
 
     @Test
     public void testThatTrackingInfoIsUpdated(){
+
         trackingInfos.save(trackingInfo);
         assertEquals(1,trackingInfos.count());
         trackingInfo.setInfo("customer requests goods be re-routed to Abuja");
         trackingInfo.setTime(LocalDateTime.now());
         trackingInfos.update(trackingInfo);
         assertEquals(1,trackingInfos.count());
+        System.out.println(trackingInfos);
     }
 
 
