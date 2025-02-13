@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
@@ -19,6 +20,8 @@ public class TrackingInfoTest{
     @Before
     public void setUp() {
         trackingInfo = new TrackingInfo();
+        trackingInfo.setInfo("customer requests goods be sent to Lagos");
+        trackingInfo.setTime(LocalDateTime.now());
         trackingInfos = new TrackingInfos();
     }
 
@@ -113,8 +116,19 @@ public class TrackingInfoTest{
         assertEquals(2,trackingInfos.count());
         trackingInfos.deleteAllEntities(trackingInfo, newTrackingInfo);
         assertEquals(0,trackingInfos.count());
-
     }
+
+    @Test
+    public void testThatTrackingInfoIsUpdated(){
+        trackingInfos.save(trackingInfo);
+        assertEquals(1,trackingInfos.count());
+        trackingInfo.setInfo("customer requests goods be re-routed to Abuja");
+        trackingInfo.setTime(LocalDateTime.now());
+        trackingInfos.update(trackingInfo);
+        assertEquals(1,trackingInfos.count());
+    }
+
+
 
 
 }

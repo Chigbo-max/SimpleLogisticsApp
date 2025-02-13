@@ -83,7 +83,7 @@ public class ItemTest{
         Item newItem = new Item();
         items.save(newItem);
         assertEquals(2,items.count());
-         assertEquals(2,items.findAllById(item.getId(), newItem.getId()).size());
+        assertEquals(2,items.findAllById(item.getId(), newItem.getId()).size());
     }
 
     @Test

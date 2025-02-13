@@ -81,4 +81,18 @@ public class TrackingInfos {
             deleteById(trackingInfo.getId());
         }
     }
+
+    public void update(TrackingInfo trackingInfo) {
+        trackingInfo.setInfo(trackingInfo.getInfo());
+        trackingInfo.setTime(trackingInfo.getTime());
+    }
+
+    @Override
+    public String toString() {
+        return "TrackingInfos{" +
+                "trackingInfos=" + trackingInfos +
+                '}';
+    }
+
+
 }
