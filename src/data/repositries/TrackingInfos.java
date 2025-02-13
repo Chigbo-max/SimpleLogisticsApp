@@ -14,11 +14,13 @@ public class TrackingInfos {
         return trackingInfos.size();
     }
 
-    public void save(TrackingInfo trackingInfo) {
-        trackingInfo.setId(generateId());
-        trackingInfo.setItemId(trackingInfo.getItemId());
-        trackingInfos.add(trackingInfo);
+    public TrackingInfo save(TrackingInfo trackingInfo) {
+        if(isSave(trackingInfo))saveNew(trackingInfo);
+        else replace(trackingInfo);
+        return trackingInfo;
     }
+
+
 
     public int generateId(){
        return ++counter;
@@ -58,15 +60,11 @@ public class TrackingInfos {
     }
 
     public ArrayList<TrackingInfo> findAllById(int ... ids) {
-        ArrayList<TrackingInfo> foundTrackingInfo = new ArrayList<>();
-        for(int id : ids) {
-            TrackingInfo trackingInfo = findById(id);
-            if (trackingInfo != null) {
-                foundTrackingInfo.add(trackingInfo);
-            }
-        }
-       return foundTrackingInfo;
+        ArrayList<TrackingInfo> foundTrackingInfo = getTrackingInfos(ids);
+        return foundTrackingInfo;
     }
+
+
 
     public ArrayList<TrackingInfo> findAll() {
         return trackingInfos;
@@ -88,6 +86,34 @@ public class TrackingInfos {
         trackingInfo.setTime(trackingInfo.getTime());
     }
 
+
+    private void replace(TrackingInfo trackingInfo) {
+        findById(trackingInfo.getId());
+        deleteById(trackingInfo.getId());
+        trackingInfos.add(trackingInfo);
+
+    }
+
+    private boolean isSave(TrackingInfo trackingInfo) {
+        return trackingInfo.getId() == 0;
+    }
+
+    private void saveNew(TrackingInfo trackingInfo) {
+        trackingInfo.setId(generateId());
+        trackingInfo.setItemId(trackingInfo.getItemId());
+        trackingInfos.add(trackingInfo);
+    }
+
+    private ArrayList<TrackingInfo> getTrackingInfos(int[] ids) {
+        ArrayList<TrackingInfo> foundTrackingInfo = new ArrayList<>();
+        for(int id : ids) {
+            TrackingInfo trackingInfo = findById(id);
+            if (trackingInfo != null) {
+                foundTrackingInfo.add(trackingInfo);
+            }
+        }
+        return foundTrackingInfo;
+    }
     @Override
     public String toString() {
         return "TrackingInfos{" +

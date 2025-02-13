@@ -18,10 +18,13 @@ public class Items {
         return items.size();
     }
 
-    public void save(Item item) {
-       item.setId(generateId());
-       items.add(item);
+    public Item save(Item item) {
+        if(isSaved(item)) saveNew(item);
+        else replace(item);
+        return item;
     }
+
+
 
     public int generateId(){
        return ++counter;
@@ -52,8 +55,8 @@ public class Items {
     }
 
     public boolean existById(int id) {
-        for(Item item : items) {
-            if(item.getId() == id) {
+        for(Item item : items){
+            if (item.getId() == id){
                 return true;
             }
         }
@@ -74,7 +77,26 @@ public class Items {
     }
 
     public ArrayList<Item> findAllById(int ...ids) {
-       ArrayList<Item> foundItems = new ArrayList<>();
+        return getItemsById(ids);
+    }
+
+    private void replace(Item item) {
+        findById(item.getId());
+        deleteById(item.getId());
+        items.add(item);
+    }
+
+    private void saveNew(Item item) {
+        item.setId(generateId());
+        items.add(item);
+    }
+
+    private boolean isSaved(Item item){
+        return item.getId() == 0;
+    }
+
+    private ArrayList<Item> getItemsById(int[] ids) {
+        ArrayList<Item> foundItems = new ArrayList<>();
         for(int id : ids){
             Item item = findById(id);
             if(item != null) {
@@ -84,11 +106,7 @@ public class Items {
         return foundItems;
     }
 
-    public void update(Item item) {
-       item.setName(item.getName());
-       item.setDescription(item.getDescription());
-       item.setWeightInGrams(item.getWeightInGrams());
-    }
+
 
     @Override
     public String toString() {

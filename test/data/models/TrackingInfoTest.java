@@ -124,7 +124,7 @@ public class TrackingInfoTest{
         assertEquals(1,trackingInfos.count());
         trackingInfo.setInfo("customer requests goods be re-routed to Abuja");
         trackingInfo.setTime(LocalDateTime.now());
-        trackingInfos.update(trackingInfo);
+        trackingInfos.save(trackingInfo);
         assertEquals(1,trackingInfos.count());
         System.out.println(trackingInfos);
     }

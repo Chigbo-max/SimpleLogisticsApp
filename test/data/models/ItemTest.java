@@ -83,7 +83,7 @@ public class ItemTest{
         Item newItem = new Item();
         items.save(newItem);
         assertEquals(2,items.count());
-        assertEquals(2,items.findAllById(item.getId(), newItem.getId()).size());
+        assertEquals(2,items. findAllById(item.getId(), newItem.getId()).size());
     }
 
     @Test
@@ -114,7 +114,7 @@ public class ItemTest{
         item.setName("Phone");
         item.setDescription("Phone is updated");
         item.setWeightInGrams(100);
-        items.update(item);
+        items.save(item);
         assertEquals(1,items.count());
     }
 
