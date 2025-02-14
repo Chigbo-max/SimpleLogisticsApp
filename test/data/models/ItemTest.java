@@ -118,6 +118,17 @@ public class ItemTest{
         assertEquals(1,items.count());
     }
 
+    @Test
+    public void saveTwoItems_deleteAllEntities_getZero(){
+        items.save(item);
+        assertEquals(1,items.count());
+        Item newItem = new Item();
+        items.save(newItem);
+        assertEquals(2,items.count());
+        items.deleteAllEntities(item, newItem);
+        assertEquals(0,items.count());
+    }
+
 
 
 }

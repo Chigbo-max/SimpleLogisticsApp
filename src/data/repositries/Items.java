@@ -1,6 +1,7 @@
 package data.repositries;
 
 import data.models.Item;
+import data.models.TrackingInfo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -87,6 +88,14 @@ public class Items implements ItemsRepository {
     @Override
     public ArrayList<Item> findAllById(int ...ids) {
         return getItemsById(ids);
+    }
+
+    @Override
+    public void deleteAllEntities(Item... items) {
+
+        for(Item item : items) {
+            deleteById(item.getId());
+        }
     }
 
     private void replace(Item item) {

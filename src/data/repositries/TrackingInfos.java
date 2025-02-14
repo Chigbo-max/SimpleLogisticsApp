@@ -2,18 +2,21 @@ package data.repositries;
 
 import data.models.TrackingInfo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class TrackingInfos {
+public class TrackingInfos implements TrackingInfosRepository{
 
     ArrayList<TrackingInfo> trackingInfos = new ArrayList<>();
     private static int counter;
 
+    @Override
     public long count() {
         return trackingInfos.size();
     }
 
+    @Override
     public TrackingInfo save(TrackingInfo trackingInfo) {
         if(isSave(trackingInfo))saveNew(trackingInfo);
         else replace(trackingInfo);
@@ -26,6 +29,7 @@ public class TrackingInfos {
        return ++counter;
     }
 
+    @Override
     public TrackingInfo findById(int id) {
         for (TrackingInfo trackingInfo : trackingInfos) {
             if (trackingInfo.getId() == id) {
@@ -35,17 +39,24 @@ public class TrackingInfos {
         return null;
     }
 
+    @Override
     public void deleteById(int id) {
         TrackingInfo trackingInfo = findById(id);
         trackingInfos.remove(trackingInfo);
     }
 
+    @Override
     public void deleteAllById(int... ids) {
         for (int id : ids) {
             deleteById(id);
         }
     }
 
+    @Override
+    public void deleteAll() {
+        trackingInfos.clear();
+    }
+    @Override
     public boolean existById(int id) {
         for (TrackingInfo trackingInfo : trackingInfos) {
             if (trackingInfo.getId() == id) {
@@ -55,25 +66,22 @@ public class TrackingInfos {
         return false;
     }
 
-    public void deleteAll() {
-        trackingInfos.clear();
-    }
-
-    public ArrayList<TrackingInfo> findAllById(int ... ids) {
-        ArrayList<TrackingInfo> foundTrackingInfo = getTrackingInfos(ids);
-        return foundTrackingInfo;
-    }
-
-
-
+    @Override
     public ArrayList<TrackingInfo> findAll() {
         return trackingInfos;
     }
 
+    @Override
     public ArrayList<TrackingInfo> saveAll(TrackingInfo ... trackingInfos) {
         return new ArrayList<>(Arrays.asList(trackingInfos));
     }
 
+    @Override
+    public ArrayList<TrackingInfo> findAllById(int ... ids) {
+        return getTrackingInfos(ids);
+    }
+
+    @Override
     public void deleteAllEntities(TrackingInfo ... trackingInfos) {
 
         for(TrackingInfo trackingInfo : trackingInfos) {
@@ -81,17 +89,12 @@ public class TrackingInfos {
         }
     }
 
-    public void update(TrackingInfo trackingInfo) {
-        trackingInfo.setInfo(trackingInfo.getInfo());
-        trackingInfo.setTime(trackingInfo.getTime());
-    }
 
 
     private void replace(TrackingInfo trackingInfo) {
         findById(trackingInfo.getId());
         deleteById(trackingInfo.getId());
         trackingInfos.add(trackingInfo);
-
     }
 
     private boolean isSave(TrackingInfo trackingInfo) {
@@ -114,6 +117,7 @@ public class TrackingInfos {
         }
         return foundTrackingInfo;
     }
+
     @Override
     public String toString() {
         return "TrackingInfos{" +

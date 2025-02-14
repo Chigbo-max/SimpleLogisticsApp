@@ -16,5 +16,6 @@ public interface ItemsRepository {
     List<Item> findAll();
     List<Item> saveAll(Item... items);
     List<Item> findAllById(int ...ids);
+    void deleteAllEntities(Item... items);
 
 }
