@@ -28,11 +28,6 @@ public class Items implements ItemsRepository {
     }
 
 
-
-    public int generateId(){
-       return ++counter;
-    }
-
     @Override
     public Item findById(int id) {
        for(Item item : items) {
@@ -107,6 +102,10 @@ public class Items implements ItemsRepository {
     private void saveNew(Item item) {
         item.setId(generateId());
         items.add(item);
+    }
+
+    private int generateId(){
+        return ++counter;
     }
 
     private boolean isSaved(Item item){

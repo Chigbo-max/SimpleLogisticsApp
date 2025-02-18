@@ -23,9 +23,7 @@ public class TrackingInfos implements TrackingInfosRepository{
         return trackingInfo;
     }
 
-
-
-    public int generateId(){
+    private int generateId(){
        return ++counter;
     }
 
